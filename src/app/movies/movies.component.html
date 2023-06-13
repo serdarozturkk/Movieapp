@@ -1,0 +1,57 @@
+<div *ngIf="movies.length>0  else no_movies">
+
+    <h1>
+        {{title}}
+    </h1>
+    <div class="alert alert-warning" *ngIf="movies.length>0">
+        {{movies.length}} film bulundu.
+    </div>
+    
+    <ng-template [ngTemplateOutlet]="yes_movies"></ng-template>
+    <ng-container *ngTemplateOutlet="popularfilm; context: { popmovies: popularMovies }"></ng-container>
+
+</div>
+
+
+<ng-template #yes_movies>
+    <div class="card mb-3" *ngFor="let item of movies">
+        
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{item.imgurl}}" class="img-fluid rounded-start" alt="">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h2 class="card-title">{{item.title}}</h2>
+                    <p class="card-text"> {{item.description}} </p>
+                    <button class="btn btn-sm btn-outline-primary" >Detay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #no_movies>
+    <div class="alert alert-danger" role="alert">
+        Film Bulunamadı.
+      </div>
+</ng-template>
+<ng-template #popularfilm let-PopularFilmler="popmovies"  >
+    <h2>
+        PopularFilmler
+    </h2>
+    <div class="card mb-3" *ngFor="let item of PopularFilmler" >
+        
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{item.imgurl}}" class="img-fluid rounded-start" alt="">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h2 class="card-title">{{item.title}}</h2>
+                    <p class="card-text"> {{item.description}} </p>
+                    <button class="btn btn-sm btn-outline-primary" >Detay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
